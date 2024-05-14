@@ -1,16 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   drawing_sciling.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 13:04:38 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/04/15 18:39:26 by ozahidi          ###   ########.fr       */
+/*   Created: 2024/05/13 21:34:42 by ozahidi           #+#    #+#             */
+/*   Updated: 2024/05/13 21:37:01 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fractal.h"
+
+void	data_int(t_fractol *fractol)
+{
+	fractol->img.img_pixels = mlx_get_data_addr(fractol->img.img_ptr,
+			&fractol->img.bpp, &fractol->img.size_line, &fractol->img.endian);
+	fractol->iteration = 42;
+	fractol->value_escap = 4;
+	fractol->shift_x = 0;
+	fractol->shift_y = 0;
+	fractol->zoom = 1;
+}
 
 void	my_fractol_unit(t_fractol *fractol)
 {
@@ -41,32 +52,6 @@ void	my_fractol_unit(t_fractol *fractol)
 	data_int(fractol);
 }
 
-void	my_pixel_put(int x, int y, t_img *img, int color)
-{
-	int	p;
-	int	alpha;
-	int	transparency;
-
-	p = (y * img->size_line) + (x * 4);
-	alpha = (color >> 24) & 0xFF;
-	if (x < 5)
-		transparency = (5 - x) * alpha / 5;
-	else
-		transparency = alpha;
-	img->img_pixels[p + 0] = (color >> 8) & 0xFF;
-	img->img_pixels[p + 1] = (color >> 8) & 0xFF;
-	img->img_pixels[p + 2] = transparency;
-	img->img_pixels[p + 3] = transparency;
-}
-
-void	my_pixel_put1(int x, int y, t_img *img, int color)
-{
-	int	offset;
-
-	offset = (y * img->size_line) + (x * (img->bpp / 8));
-	*(unsigned int *)(img->img_pixels + offset) = color;
-}
-
 void	rescale(int x, int y, t_fractol *fractol)
 {
 	t_complex	z;
@@ -91,7 +76,7 @@ void	rescale(int x, int y, t_fractol *fractol)
 		}
 		i++;
 	}
-	my_pixel_put1(x, y, &fractol->img, WHITE);
+	my_pixel_put_v1(x, y, &fractol->img, WHITE);
 }
 
 void	my_intit_mlx(t_fractol *fractol)

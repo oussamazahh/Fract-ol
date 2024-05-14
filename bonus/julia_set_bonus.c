@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2_bonus.c                                     :+:      :+:    :+:   */
+/*   julia_set_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 17:50:44 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/04/15 17:52:00 by ozahidi          ###   ########.fr       */
+/*   Created: 2024/05/14 14:35:10 by ozahidi           #+#    #+#             */
+/*   Updated: 2024/05/14 14:35:30 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,4 @@ void	data_int_j(t_fractol *fractol, double x, double y)
 {
 	fractol->julia_x = x;
 	fractol->julia_y = y;
-}
-
-void	error_msg(void)
-{
-	write(2, "error in malloc", 15);
-	exit(1);
 }

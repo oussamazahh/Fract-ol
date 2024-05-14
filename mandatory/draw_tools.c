@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_tools_bonus.c                                 :+:      :+:    :+:   */
+/*   draw_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 17:31:49 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/05/13 17:42:57 by ozahidi          ###   ########.fr       */
+/*   Created: 2024/05/13 21:29:37 by ozahidi           #+#    #+#             */
+/*   Updated: 2024/05/13 21:29:48 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_fractal_bonus.h"
+#include "ft_fractal.h"
 
 void	my_pixel_put(int x, int y, t_img *img, int color)
 {

@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calcul_complex.c                                   :+:      :+:    :+:   */
+/*   extra_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 18:35:02 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/04/15 18:36:21 by ozahidi          ###   ########.fr       */
+/*   Created: 2024/05/13 19:01:35 by ozahidi           #+#    #+#             */
+/*   Updated: 2024/05/14 15:42:49 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fractal.h"
 
-t_complex	sum_complex(t_complex z1, t_complex z2)
+void	error_msg(void)
 {
-	t_complex	tmp;
-
-	tmp.x = z1.x + z2.x;
-	tmp.y = z1.y + z2.y;
-	return (tmp);
+	write(2, "error in malloc", 15);
+	exit(1);
 }
 
-t_complex	square_complex(t_complex z)
+void	clear_draw(t_fractol *fractol)
 {
-	t_complex	tmp;
+	mlx_clear_window(fractol->mlx_ptr, fractol->mlx_win);
+	my_intit_mlx(fractol);
+}
 
-	tmp.x = (z.x * z.x) - (z.y * z.y);
-	tmp.y = 2 * z.x * z.y;
-	return (tmp);
+void	invalid_input_msg(void)
+{
+	write (2, "to run <<./fractol>> Must specify one of fractol\n", 49);
+	write (2, "./fractol Mandelbrot\n", 21);
+	write (2, "./fractol Julia <num1> <num2>\n", 29);
+	exit (2);
 }

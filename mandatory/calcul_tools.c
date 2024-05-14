@@ -6,17 +6,11 @@
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 18:27:01 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/04/15 18:29:55 by ozahidi          ###   ########.fr       */
+/*   Updated: 2024/05/13 19:01:15 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fractal.h"
-
-void	data_int_j(t_fractol *fractol, double x, double y)
-{
-	fractol->julia_x = x;
-	fractol->julia_y = y;
-}
 
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -72,10 +66,4 @@ double	ft_atod(const char *str)
 	if (str[i] == '.')
 		add_to_number(&n, str, &fraction, &i);
 	return (n * sign);
-}
-
-void	error_msg(void)
-{
-	write(2, "error in malloc", 15);
-	exit(1);
 }

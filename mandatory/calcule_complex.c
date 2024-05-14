@@ -1,32 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils1_bonus.c                                     :+:      :+:    :+:   */
+/*   calcule_complex.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 20:48:02 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/04/15 18:00:17 by ozahidi          ###   ########.fr       */
+/*   Created: 2024/05/13 21:28:39 by ozahidi           #+#    #+#             */
+/*   Updated: 2024/05/14 14:28:10 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_fractal_bonus.h"
-
-static double	ft_abs(double d)
-{
-	if (d < 0.0)
-		d *= -1;
-	return (d);
-}
-
-t_complex	square_complex_burnin(t_complex z)
-{
-	t_complex	tmp;
-
-	tmp.x = (z.x * z.x) - (z.y * z.y);
-	tmp.y = ft_abs(2 * z.x * z.y);
-	return (tmp);
-}
+#include "ft_fractal.h"
 
 t_complex	sum_complex(t_complex z1, t_complex z2)
 {

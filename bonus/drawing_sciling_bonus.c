@@ -1,16 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_bonus.c                                      :+:      :+:    :+:   */
+/*   drawing_sciling_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 13:04:38 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/04/15 17:55:25 by ozahidi          ###   ########.fr       */
+/*   Updated: 2024/05/14 18:08:32 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fractal_bonus.h"
+
+void	check_burning(t_fractol *fractol, t_complex *z, t_complex *c)
+{
+	if (!ft_strcmp(fractol->name, "Burning_ship"))
+		*z = sum_complex(square_complex_burnin(*z), *c);
+	else
+		*z = sum_complex(square_complex(*z), *c);
+}
 
 void	data_int(t_fractol *fractol)
 {
@@ -21,15 +29,19 @@ void	data_int(t_fractol *fractol)
 	fractol->shift_x = 0;
 	fractol->shift_y = 0;
 	fractol->zoom = 1;
-	fractol->target_zoom = fractol->zoom;
-	fractol->target_shift_x = fractol->shift_x;
-	fractol->target_shift_y = fractol->shift_y;
-	fractol->tool_x = 4.0;
-	fractol->tool_y = 4.0;
+	fractol->center_x = 0.0;
+	fractol->center_y = 0.0;
+	fractol->width = WIDTH;
+	fractol->height = HEIGHT;
+	fractol->x_pos_min = -2.0;
+	fractol->x_pos_max = +2.0;
+	fractol->y_pos_min = -2.0;
+	fractol->y_pos_max = +2.0;
 }
 
-void	my_fractol_unit(t_fractol *fractol)
+void	my_fractol_unit(t_fractol *fractol, char *str)
 {
+	fractol->name = str;
 	fractol->mlx_ptr = mlx_init();
 	if (!fractol->mlx_ptr)
 	{
@@ -41,7 +53,6 @@ void	my_fractol_unit(t_fractol *fractol)
 	if (!fractol->mlx_win)
 	{
 		mlx_destroy_window(fractol->mlx_ptr, fractol->mlx_win);
-		free(fractol->mlx_ptr);
 		error_msg();
 		return ;
 	}
@@ -50,19 +61,9 @@ void	my_fractol_unit(t_fractol *fractol)
 	{
 		mlx_destroy_image(fractol->mlx_ptr, fractol->img.img_ptr);
 		mlx_destroy_window(fractol->mlx_ptr, fractol->mlx_win);
-		free(fractol->mlx_ptr);
 		error_msg();
-		return ;
 	}
 	data_int(fractol);
-}
-
-int	grayscale_color(int i, int max_iter)
-{
-	int	color_intensity;
-
-	color_intensity = (int)(255.0 * ((double)i / (double)max_iter));
-	return ((color_intensity << 16) | (color_intensity << 8) | color_intensity);
 }
 
 void	rescale(int x, int y, t_fractol *fractol)
@@ -72,17 +73,16 @@ void	rescale(int x, int y, t_fractol *fractol)
 	int			i;
 
 	i = 0;
-	z.x = (((x - 0.0) * (+2 - (-2)) / (WIDTH - 0)) + (-2)) * fractol->zoom
-		+ fractol->shift_x;
-	z.y = (((y - 0.0) * (+2 - (-2)) / (HEIGHT - 0)) + (-2)) * fractol->zoom
-		+ fractol->shift_y;
+	z.x = ((((x - 0.0) * (fractol->x_pos_max - (fractol->x_pos_min))
+					/ (fractol->width - 0)) + (fractol->x_pos_min))
+			+ fractol->shift_x);
+	z.y = ((((y - 0.0) * (fractol->y_pos_max - (fractol->y_pos_min))
+					/ (fractol->height - 0)) + (fractol->y_pos_min))
+			+ fractol->shift_y);
 	juila_int(fractol, &z, &c);
 	while (i < fractol->iteration)
 	{
-		if (!ft_strcmp(fractol->name, "Burning_ship"))
-			z = sum_complex(square_complex_burnin(z), c);
-		else
-			z = sum_complex(square_complex(z), c);
+		check_burning(fractol, &z, &c);
 		if ((z.x * z.x) + (z.y * z.y) > fractol->value_escap)
 		{
 			fractol->color = grayscale_color(i, fractol->iteration);
@@ -91,7 +91,7 @@ void	rescale(int x, int y, t_fractol *fractol)
 		}
 		i++;
 	}
-	my_pixel_put1(x, y, &fractol->img, WHITE);
+	my_pixel_put_v1(x, y, &fractol->img, WHITE);
 }
 
 void	my_intit_mlx(t_fractol *fractol)
@@ -100,10 +100,10 @@ void	my_intit_mlx(t_fractol *fractol)
 	int	y;
 
 	y = 0;
-	while (y < HEIGHT)
+	while (y < fractol->height)
 	{
 		x = 0;
-		while (x < WIDTH)
+		while (x < fractol->width)
 		{
 			rescale(x, y, fractol);
 			x++;
