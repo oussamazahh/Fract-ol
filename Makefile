@@ -6,13 +6,15 @@
 #    By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/02 16:16:54 by ozahidi           #+#    #+#              #
-#    Updated: 2024/05/14 17:10:53 by ozahidi          ###   ########.fr        #
+#    Updated: 2024/05/17 16:28:36 by ozahidi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-CFLAGS = -lmlx -framework OpenGL -framework AppKit
+CFLAGS = -Wall -Wextra -Werror
+
+MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit
 #  -g  -fsanitize=address
 NAME = fractol
 
@@ -36,18 +38,18 @@ GREEN=\033[0;32m
 NC=\033[0m
 
 %.o: %.c mandatory/ft_fractal.h bonus/ft_fractal_bonus.h
-	@${CC} -c $< -o $@
+	@${CC} ${CFLAGS} -c $< -o $@
 
 all : ${NAME}
 
 ${NAME} : ${OBJS} 
 	@echo  "${RED}[Building fractol]${NC}"
-	@${CC} ${OBJS} ${CFLAGS} -o ${NAME}
+	@${CC} ${OBJS} ${CFLAGS} ${MLX_FLAGS} -o ${NAME}
 	@echo  "${GREEN} >>DONE<<${NC}" 
 
 bonus : ${BOBJS} 
 	@echo  "${RED}[Building fractol_bonus]${NC}"
-	@${CC} ${BOBJS} ${CFLAGS} -o ${BNAME}
+	@${CC} ${BOBJS} ${CFLAGS} ${MLX_FLAGS} -o ${BNAME}
 	@echo  "${GREEN} >>DONE<<${NC}" 
 
 clean:

@@ -6,7 +6,7 @@
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:22:52 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/05/14 15:15:50 by ozahidi          ###   ########.fr       */
+/*   Updated: 2024/05/19 21:41:32 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	mouse_event(int button, int x, int y, t_fractol *fractol)
 {
 	double	size;
 
+	(void)x;
+	(void)y;
 	if (button == 4)
 	{
 		size = 0.1;

@@ -6,7 +6,7 @@
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 19:15:29 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/05/14 14:30:12 by ozahidi          ###   ########.fr       */
+/*   Updated: 2024/05/16 20:41:18 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void	help_destroy(t_fractol *fractol)
 
 int	mouse_event(int button, int x, int y, t_fractol *fractol)
 {
+	(void)x;
+	(void)y;
 	if (button == 4)
 	{
 		fractol->zoom *= 0.95;

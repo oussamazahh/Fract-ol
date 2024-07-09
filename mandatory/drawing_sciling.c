@@ -6,7 +6,7 @@
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 21:34:42 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/05/13 21:37:01 by ozahidi          ###   ########.fr       */
+/*   Updated: 2024/05/16 20:41:34 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,10 @@ void	my_fractol_unit(t_fractol *fractol)
 	data_int(fractol);
 }
 
-void	rescale(int x, int y, t_fractol *fractol)
+void	sciling(int x, int y, t_fractol *fractol)
 {
 	t_complex	z;
 	t_complex	c;
-	int			color;
 	int			i;
 
 	i = 0;
@@ -74,9 +73,10 @@ void	rescale(int x, int y, t_fractol *fractol)
 			my_pixel_put(x, y, &fractol->img, fractol->color);
 			return ;
 		}
+		else
+			my_pixel_put_v1(x, y, &fractol->img, WHITE);
 		i++;
 	}
-	my_pixel_put_v1(x, y, &fractol->img, WHITE);
 }
 
 void	my_intit_mlx(t_fractol *fractol)
@@ -90,7 +90,7 @@ void	my_intit_mlx(t_fractol *fractol)
 		x = 0;
 		while (x < WIDTH)
 		{
-			rescale(x, y, fractol);
+			sciling(x, y, fractol);
 			x++;
 		}
 		y++;

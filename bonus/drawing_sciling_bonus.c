@@ -6,7 +6,7 @@
 /*   By: ozahidi <ozahidi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 13:04:38 by ozahidi           #+#    #+#             */
-/*   Updated: 2024/05/14 18:08:32 by ozahidi          ###   ########.fr       */
+/*   Updated: 2024/05/15 14:42:01 by ozahidi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,10 @@ void	rescale(int x, int y, t_fractol *fractol)
 			my_pixel_put(x, y, &fractol->img, fractol->color);
 			return ;
 		}
+		else
+			my_pixel_put_v1(x, y, &fractol->img, WHITE);
 		i++;
 	}
-	my_pixel_put_v1(x, y, &fractol->img, WHITE);
 }
 
 void	my_intit_mlx(t_fractol *fractol)
